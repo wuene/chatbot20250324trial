@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome to TaiSoc</title>
+    <link href="https://fonts.googleapis.com/css2?family=Boldonse&family=Noto+Sans+TC:wght@100..900&family=Winky+Sans:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container" id="signup-container">
+        <!-- 你的原本內容 -->
+        <img src="{{ url_for('static', filename='logo.png') }}" alt="TaiSoc Logo" class="logo">
+        <h1>Welcome to TaiSoc</h1>
+        <h2>Create an account</h2>
+        <p>Enter your email to sign up for this app</p>
+
+        <div class="input-container">
+            <input type="email" placeholder="請輸入Email">
+            <!-- 這裡加上 id="signup-btn" -->
+            <button id="signup-btn">Sign up with email</button>
+        </div>
+
+        <p class="divider">or continue with</p>
+
+        <button class="google-btn">
+            <img src="{{ url_for('static', filename='google.png') }}" alt="Google Logo">
+        </button>
+
+        <p class="terms">
+            By clicking continue, you agree to our 
+            <a href="#">Terms of Service</a> and 
+            <a href="#">Privacy Policy</a>
+        </p>
+    </div>
+
+    <!-- Modal (一開始隱藏) -->
+    <div id="modal" class="modal">
+      <div class="modal-content">
+        <h2>I want to know more about you</h2>
+        <input type="text" placeholder="Name">
+        <input type="date" placeholder="Birthday">
+        <input type="text" placeholder="Phone number">
+        <button id="confirm-btn">Confirm</button>
+        <p>
+          By clicking continue, you agree to our 
+          <a href="#">Terms of Service</a> and 
+          <a href="#">Privacy Policy</a>
+        </p>
+      </div>
+    </div>
+
+    <!-- Success 區塊（預設隱藏） -->
+    <div class="container" id="success-container" style="display: none;">
+      <img src="{{ url_for('static', filename='logo.png') }}" alt="TaiSoc Logo" class="logo">
+      <h2>SUCCESS</h2>
+      <button id="continue-btn">Continue</button>
+    </div>
+
+
+    <!-- 請確認 script.js 放在 static/ 下 -->
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>

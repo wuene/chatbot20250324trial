@@ -1,0 +1,352 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>TaiSoc Chat</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/dist/tabler-icons.min.css"
+    />
+    <link rel="stylesheet" href="{{ url_for('static', filename='chat-styles.css') }}">  </head>
+  <body>
+    <div class="app-container">
+      <aside class="sidebar">
+        <div class="sidebar-header">
+          <img
+            src="https://cdn.builder.io/api/v1/image/assets/TEMP/7ade988cb18016f636c1a6d0251d19f454a879e4"
+            alt="TaiSoc Logo"
+            class="logo"
+          />
+          <h1 class="app-title">TaiSoc</h1>
+        </div>
+
+        <nav class="nav-menu">
+          <a href="#" class="nav-item">
+            <div class="icon-wrapper">
+              <svg
+                class="nav-icon"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M3 9L12 2L21 9V20C21 20.5304 20.7893 21.0391 20.4142 21.4142C20.0391 21.7893 19.5304 22 19 22H5C4.46957 22 3.96086 21.7893 3.58579 21.4142C3.21071 21.0391 3 20.5304 3 20V9Z"
+                  stroke="black"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                ></path>
+                <path
+                  d="M9 22V12H15V22"
+                  stroke="black"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                ></path>
+              </svg>
+            </div>
+            <span class="nav-label">Home</span>
+          </a>
+
+          <a href="/explore" class="nav-item">
+            <div class="icon-wrapper">
+              <svg
+                class="nav-icon"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M12 7.49997L12 11.9999M12 11.9999V16.4999M12 11.9999H16.5M12 11.9999H7.5M21 6.37498L21 17.625C21 19.489 19.489 21 17.625 21H6.375C4.51104 21 3 19.489 3 17.625V6.37498C3 4.51103 4.51104 3 6.375 3H17.625C19.489 3 21 4.51103 21 6.37498Z"
+                  stroke="black"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                ></path>
+              </svg>
+            </div>
+            <span class="nav-label">Explore</span>
+          </a>
+
+          <a href="/history" class="nav-item">
+            <div class="icon-wrapper">
+              <svg
+                class="nav-icon"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M11 19C15.4183 19 19 15.4183 19 11C19 6.58172 15.4183 3 11 3C6.58172 3 3 6.58172 3 11C3 15.4183 6.58172 19 11 19Z"
+                  stroke="black"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                ></path>
+                <path
+                  d="M20.9999 21L16.6499 16.65"
+                  stroke="black"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                ></path>
+              </svg>
+            </div>
+            <span class="nav-label">History</span>
+          </a>
+        </nav>
+
+        <!-- 放在左側 sidebar 區域中 -->
+        <div id="history-panel" style="flex: 1; display: none; flex-direction: column; padding: 8px; overflow: hidden; padding-bottom: 80px;">
+          <input
+            type="text"
+            id="searchInput"
+            placeholder="搜尋聊天記錄..."
+            style="padding: 6px; border-radius: 8px; border: 1px solid #ccc; margin-bottom: 8px;"
+            />
+          <div id="history-list" style="flex: 1; overflow-y: auto; display: flex; flex-direction: column; gap: 8px;"></div>
+        </div>
+
+
+
+        <div class="sidebar-footer">
+          <button class="menu-button" id="dotsButton">
+            <svg
+              class="dots-icon"
+              width="25"
+              height="25"
+              viewBox="0 0 25 25"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M12.5 7.5C11.1193 7.5 10 6.38071 10 5C10 3.61929 11.1193 2.5 12.5 2.5C13.8807 2.5 15 3.61929 15 5C15 6.38071 13.8807 7.5 12.5 7.5Z"
+                stroke="#272727"
+                stroke-width="2"
+              ></path>
+              <path
+                d="M12.5 15C11.1193 15 10 13.8807 10 12.5C10 11.1193 11.1193 10 12.5 10C13.8807 10 15 11.1193 15 12.5C15 13.8807 13.8807 15 12.5 15Z"
+                stroke="#272727"
+                stroke-width="2"
+              ></path>
+              <path
+                d="M12.5 22.5C11.1193 22.5 10 21.3807 10 20C10 18.6193 11.1193 17.5 12.5 17.5C13.8807 17.5 15 18.6193 15 20C15 21.3807 13.8807 22.5 12.5 22.5Z"
+                stroke="#272727"
+                stroke-width="2"
+              ></path>
+            </svg>
+          </button>
+           <!-- 隱藏的選單容器（預設不顯示） -->
+          <div class="dots-menu-container" id="dotsMenu" style="display: none; position: absolute; bottom: 40px; right: 2px;">
+            <nav class="sidebar-menu">
+                <ul class="menu-list">
+                  <li class="menu-item">
+                    <i class="ti ti-message-circle menu-icon"></i>
+                    <span class="menu-text">Feedback</span>
+                  </li>
+                  <li class="menu-item">
+                    <i class="ti ti-settings menu-icon"></i>
+                    <span class="menu-text">Setting</span>
+                  </li>
+                  <li class="menu-item">
+                    <i class="ti ti-info-circle menu-icon"></i>
+                    <span class="menu-text">About us</span>
+                  </li>
+                </ul>
+            </nav>
+          </div>
+        </div>
+      </aside>
+
+      <main class="main-content">
+        <div class="action-button-container">
+          <button class="new-button">
+            <svg
+              class="plus-icon"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <rect x="0.5" y="0.5" width="23" height="23" fill="white"></rect>
+              <rect
+                x="0.5"
+                y="0.5"
+                width="23"
+                height="23"
+                stroke="black"
+              ></rect>
+              <path
+                d="M11.9998 4.8L11.9998 19.2M19.1998 12L4.7998 12"
+                stroke="black"
+                stroke-width="2"
+                stroke-linecap="round"
+              ></path>
+            </svg>
+            <span class="button-text">New</span>
+          </button>
+        </div>
+
+        <section class="chat-welcome">
+          <img
+            src="https://cdn.builder.io/api/v1/image/assets/TEMP/dacb3fa5f2214a0bbaf9ac4474c3f8b689a7e3d0"
+            alt="Chat Logo"
+            class="chat-logo"
+          />
+          <p class="ㄑ">Any new knowledge about Taiwan?</p>
+          <p class="welcome-text">Ask me...</p>
+        </section>
+
+        <!-- 加入聊天紀錄容器 -->
+        <div id="chat-history" style="overflow-y: auto; max-height: 670px; padding: 16px;"></div>
+
+        <div class="message-input-container">
+          <input type="text" id="message" placeholder="Enter your message" />
+          <div class="input-actions">
+            <button class="input-action-button">
+              <svg
+                class="input-icon"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M20 10.9696L11.9628 18.5497C10.9782 19.4783 9.64274 20 8.25028 20C6.85782 20 5.52239 19.4783 4.53777 18.5497C3.55315 17.6211 3 16.3616 3 15.0483C3 13.7351 3.55315 12.4756 4.53777 11.547L12.575 3.96687C13.2314 3.34779 14.1217 3 15.05 3C15.9783 3 16.8686 3.34779 17.525 3.96687C18.1814 4.58595 18.5502 5.4256 18.5502 6.30111C18.5502 7.17662 18.1814 8.01628 17.525 8.63535L9.47904 16.2154C9.15083 16.525 8.70569 16.6989 8.24154 16.6989C7.77738 16.6989 7.33224 16.525 7.00403 16.2154C6.67583 15.9059 6.49144 15.4861 6.49144 15.0483C6.49144 14.6106 6.67583 14.1907 7.00403 13.8812L14.429 6.88674"
+                  stroke="black"
+                  stroke-opacity="0.42"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                ></path>
+              </svg>
+            </button>
+            <button class="input-action-button">
+              <svg
+                class="input-icon"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M12 1C11.2044 1 10.4413 1.31607 9.87868 1.87868C9.31607 2.44129 9 3.20435 9 4V12C9 12.7956 9.31607 13.5587 9.87868 14.1213C10.4413 14.6839 11.2044 15 12 15C12.7956 15 13.5587 14.6839 14.1213 14.1213C14.6839 13.5587 15 12.7956 15 12V4C15 3.20435 14.6839 2.44129 14.1213 1.87868C13.5587 1.31607 12.7956 1 12 1Z"
+                  stroke="#828282"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                ></path>
+                <path
+                  d="M19 10V12C19 13.8565 18.2625 15.637 16.9497 16.9497C15.637 18.2625 13.8565 19 12 19C10.1435 19 8.36301 18.2625 7.05025 16.9497C5.7375 15.637 5 13.8565 5 12V10"
+                  stroke="#828282"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                ></path>
+                <path
+                  d="M12 19V23"
+                  stroke="#828282"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                ></path>
+                <path
+                  d="M8 23H16"
+                  stroke="#828282"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                ></path>
+              </svg>
+            </button>
+            <button class="input-action-button">
+              <svg
+                class="input-icon"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z"
+                  stroke="#828282"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                ></path>
+                <path
+                  d="M8 14C8 14 9.5 16 12 16C14.5 16 16 14 16 14"
+                  stroke="#828282"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                ></path>
+                <path
+                  d="M9 9H9.01"
+                  stroke="#828282"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                ></path>
+                <path
+                  d="M15 9H15.01"
+                  stroke="#828282"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                ></path>
+              </svg>
+            </button>
+            <button class="input-action-button">
+              <svg
+                class="input-icon"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M19 3H5C3.89543 3 3 3.89543 3 5V19C3 20.1046 3.89543 21 5 21H19C20.1046 21 21 20.1046 21 19V5C21 3.89543 20.1046 3 19 3Z"
+                  stroke="#828282"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                ></path>
+                <path
+                  d="M8.5 10C9.32843 10 10 9.32843 10 8.5C10 7.67157 9.32843 7 8.5 7C7.67157 7 7 7.67157 7 8.5C7 9.32843 7.67157 10 8.5 10Z"
+                  stroke="#828282"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                ></path>
+                <path
+                  d="M21 15L16 10L5 21"
+                  stroke="#828282"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                ></path>
+              </svg>
+            </button>
+          </div>
+        </div>
+      </main>
+    </div>
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+  </body>
+</html>

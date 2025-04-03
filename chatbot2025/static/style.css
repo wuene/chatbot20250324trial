@@ -1,0 +1,248 @@
+/* 通用樣式 */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #FFFFFF;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+/* 容器 */
+#signup-container {
+    background: white;
+    padding: 40px;
+    border-radius: 0;
+    box-shadow: none;
+    text-align: center;
+    width: 400px;
+    border: 1px solid #E0E0E0;
+}
+
+/* Logo */
+.logo {
+    width: 80px;
+    height: 80px;
+    margin-bottom: 20px;
+    border-radius: 50%;
+    background-color: #F0EDE8;
+}
+
+/* 標題 */
+h1 {
+    font-size: 20px;
+    color: #3E3E3E;
+    margin-bottom: 16px;
+    text-decoration: underline;
+    font-weight: normal;
+}
+
+h2 {
+    font-size: 18px;
+    font-weight: bold;
+    color: #3E3E3E;
+    margin-bottom: 10px;
+}
+
+/* 文字 */
+p {
+    font-size: 14px;
+    color: #666;
+    margin-bottom: 16px;
+}
+
+/* 輸入框 */
+.input-container {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 16px;
+}
+
+input {
+    width: calc(100% - 22px);
+    padding: 10px;
+    border: 1px solid #E0E0E0;
+    border-radius: 6px;
+    font-size: 14px;
+}
+
+/* 按鈕 */
+button {
+    width: 100%;
+    background-color: #C9C2B7;
+    color: white;
+    border: none;
+    padding: 12px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 14px;
+    margin-bottom: 10px;
+}
+
+button:hover {
+    background-color: #B5AEA3;
+}
+
+/* 分隔線 */
+.divider {
+    position: relative;
+    text-align: center;
+    margin: 16px 0;
+    color: #777;
+    font-size: 14px;
+}
+
+.divider::before, .divider::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    width: 40%;
+    height: 1px;
+    background: #E0E0E0;
+}
+
+.divider::before { left: 0; }
+.divider::after { right: 0; }
+
+/* Google 登入按鈕 */
+.google-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #F5F5F5;
+    border: none;
+    color: #3E3E3E;
+    gap: 10px;
+}
+
+.google-btn img {
+    width: 18px;
+}
+
+/* 條款 */
+.terms {
+    font-size: 12px;
+    color: #777;
+    margin-top: 16px;
+}
+
+.terms a {
+    color: #333;
+    text-decoration: none;
+    font-weight: normal;
+}
+
+/* Auth 標籤 (如需要) */
+.auth-label {
+    color: #4B99D3;
+    position: absolute;
+    top: 32px;
+    left: 32px;
+    font-size: 14px;
+}
+
+/* Modal 遮罩 */
+.modal {
+    display: none; /* 預設隱藏 */
+    position: fixed;
+    z-index: 999; /* 顯示在最前面 */
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.5); /* 半透明黑色背景 */
+}
+
+/* Modal 內容區塊 */
+.modal-content {
+    background-color: #fff;
+    margin: 10% auto;
+    padding: 20px;
+    width: 300px;
+    border-radius: 8px;
+    text-align: center;
+}
+
+.modal-content input {
+    display: block;
+    width: 100%;
+    margin: 8px 0;
+    padding: 8px;
+}
+
+
+html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    /* 你想要的字體、背景都可以放這裡 */
+    font-family: Arial, sans-serif;
+    background: #fff;
+  }
+  
+  /* 讓 success-container 覆蓋整個畫面 */
+  #success-container {
+    position: fixed;  /* 或 absolute 也可，但 fixed 比較不會被捲動 */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;    /* 佔滿視窗高度 */
+    background-color: #FFFFFF; 
+  
+    /* flex 置中，確保內容水平 & 垂直都在正中央 */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center; /* 文字水平置中 */
+
+    /* 移除任何可能的padding和margin */
+    padding: 0;
+    margin: 0;
+  }
+  
+  /* Logo 大小、間距 */
+  #success-container .logo {
+    width: 100px;
+    height: 100px;
+    margin-top: 200px;
+    border-radius: 50%;
+    object-fit: cover; /* 若圖片比例不一，可自動裁切 */
+  }
+  
+  /* Success 標題 */
+  #success-container h2 {
+    font-size: 24px;
+    color: #64573D;
+    margin-bottom: 20px;
+    font-weight: bolder; /* 或 bold，依需求 */
+  }
+  
+  /* 按鈕樣式：寬度可自訂 */
+  #success-container button {
+    background-color: #6D6D6D;
+    color: #FFF;
+    border: none;
+    border-radius: 4px;
+    padding: 10px 24px;
+    font-size: 16px;
+    cursor: pointer;
+    width: 320px;
+    /* 確保按鈕上方有適當間距 */
+    text-align: center;
+    /* 你若想讓按鈕更寬，可加上 width: 80%; max-width: 600px; 等 */
+  }
+  
+  #success-container button:hover {
+    background-color: #5D5D5D;
+  }
+  
+  /* 移除 sidebar 連結的底線和顏色 */
+.nav-list a {
+    text-decoration: none;
+    color: inherit;
+  }
+

@@ -1,0 +1,570 @@
+<!doctype html>
+<html lang="zh-TW">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>TaiSoc - Taiwan Travel Platform</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='chat-styles.css') }}">
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/dist/tabler-icons.min.css"
+    />
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Inter", sans-serif;
+        background-color: #ffffff;
+      }
+
+
+      .sidebar {
+        width: 256px;
+        border-right: 1px solid #e0e0e0;
+        padding: 16px 8px;
+      }
+
+      @media (max-width: 640px) {
+        .sidebar {
+          display: none;
+        }
+      }
+
+
+
+      .logo {
+        width: 40px;
+        height: 39px;
+        border-radius: 191px;
+      }
+
+
+      .nav-list {
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+        list-style-type: none;
+      }
+
+      .nav-item {
+        display: flex;
+        align-items: center;
+        padding: 8px 16px;
+        gap: 16px;
+        border-radius: 8px;
+        cursor: pointer;
+      }
+
+      .nav-item-text {
+        font-size: 16px;
+        font-weight: 500;
+        color: #000;
+      }
+
+      .nav-icon {
+        width: 24px;
+        height: 24px;
+      }
+
+      .main-content {
+        flex: 1;
+        padding: 38px 80px;
+      }
+
+      @media (max-width: 991px) {
+        .main-content {
+          padding: 20px;
+        }
+      }
+
+      .content-header {
+        display: flex;
+        justify-content: flex-end;
+        margin-bottom: 40px;
+      }
+
+      .new-button {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+        background: none;
+        border: none;
+        cursor: pointer;
+      }
+
+      @media (max-width: 640px) {
+        .new-button {
+          scale: 0.9;
+        }
+      }
+
+      .plus-icon {
+        width: 24px;
+        height: 24px;
+      }
+
+      .new-button-text {
+        color: #fff;
+        font-size: 20px;
+        padding: 0 16px;
+        height: 40px;
+        border-radius: 8px;
+        background-color: #000;
+        display: flex;
+        align-items: center;
+      }
+
+      .section-title {
+        font-size: 34px;
+        font-weight: 600;
+        letter-spacing: -0.68px;
+        margin-bottom: 27px;
+      }
+
+      @media (max-width: 640px) {
+        .section-title {
+          font-size: 28px;
+        }
+      }
+
+      .card-grid {
+        display: flex;
+        gap: 32px;
+        flex-wrap: wrap;
+        margin-bottom: 40px;
+      }
+
+      @media (max-width: 991px) {
+        .card-grid {
+          gap: 20px;
+        }
+      }
+
+      .card {
+        width: 232px;
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+      }
+
+      @media (max-width: 991px) {
+        .card {
+          width: calc(50% - 10px);
+        }
+      }
+
+      @media (max-width: 640px) {
+        .card {
+          width: 100%;
+        }
+      }
+
+      .card-image {
+        width: 100%;
+        height: 232px;
+        border-radius: 8px;
+        object-fit: cover;
+      }
+
+      .card-content {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+      }
+
+      .card-title {
+        font-size: 20px;
+        font-weight: 500;
+        color: #000;
+      }
+
+      .card-description {
+        font-size: 16px;
+        color: #454545;
+        line-height: 150%;
+      }
+    </style>
+  </head>
+  <body>
+    <main class="app-container">
+      <aside class="sidebar">
+        <div class="sidebar-header">
+          <img
+            src="https://cdn.builder.io/api/v1/image/assets/TEMP/7ade988cb18016f636c1a6d0251d19f454a879e4"
+            alt="TaiSoc Logo"
+            class="logo"
+          />
+          <h1 class="app-title">TaiSoc</h1>
+        </div>
+
+        <nav class="nav-menu">
+          <a href="/chat" class="nav-item">
+            <div class="icon-wrapper">
+              <svg
+                class="nav-icon"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M3 9L12 2L21 9V20C21 20.5304 20.7893 21.0391 20.4142 21.4142C20.0391 21.7893 19.5304 22 19 22H5C4.46957 22 3.96086 21.7893 3.58579 21.4142C3.21071 21.0391 3 20.5304 3 20V9Z"
+                  stroke="black"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                ></path>
+                <path
+                  d="M9 22V12H15V22"
+                  stroke="black"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                ></path>
+              </svg>
+            </div>
+            <span class="nav-label">Home</span>
+          </a>
+
+          <a href="/explore" class="nav-item">
+            <div class="icon-wrapper">
+              <svg
+                class="nav-icon"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M12 7.49997L12 11.9999M12 11.9999V16.4999M12 11.9999H16.5M12 11.9999H7.5M21 6.37498L21 17.625C21 19.489 19.489 21 17.625 21H6.375C4.51104 21 3 19.489 3 17.625V6.37498C3 4.51103 4.51104 3 6.375 3H17.625C19.489 3 21 4.51103 21 6.37498Z"
+                  stroke="black"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                ></path>
+              </svg>
+            </div>
+            <span class="nav-label">Explore</span>
+          </a>
+
+          <a href="/chat" class="nav-item">
+            <div class="icon-wrapper">
+              <svg
+                class="nav-icon"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M11 19C15.4183 19 19 15.4183 19 11C19 6.58172 15.4183 3 11 3C6.58172 3 3 6.58172 3 11C3 15.4183 6.58172 19 11 19Z"
+                  stroke="black"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                ></path>
+                <path
+                  d="M20.9999 21L16.6499 16.65"
+                  stroke="black"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                ></path>
+              </svg>
+            </div>
+            <span class="nav-label">History</span>
+          </a>
+        </nav>
+
+        <div id="history-list" style="margin: 16px 8px 0; display: flex; flex-direction: column; gap: 8px;"></div>
+
+
+        <div class="sidebar-footer">
+          <button class="menu-button" id="dotsButton">
+            <svg
+              class="dots-icon"
+              width="25"
+              height="25"
+              viewBox="0 0 25 25"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M12.5 7.5C11.1193 7.5 10 6.38071 10 5C10 3.61929 11.1193 2.5 12.5 2.5C13.8807 2.5 15 3.61929 15 5C15 6.38071 13.8807 7.5 12.5 7.5Z"
+                stroke="#272727"
+                stroke-width="2"
+              ></path>
+              <path
+                d="M12.5 15C11.1193 15 10 13.8807 10 12.5C10 11.1193 11.1193 10 12.5 10C13.8807 10 15 11.1193 15 12.5C15 13.8807 13.8807 15 12.5 15Z"
+                stroke="#272727"
+                stroke-width="2"
+              ></path>
+              <path
+                d="M12.5 22.5C11.1193 22.5 10 21.3807 10 20C10 18.6193 11.1193 17.5 12.5 17.5C13.8807 17.5 15 18.6193 15 20C15 21.3807 13.8807 22.5 12.5 22.5Z"
+                stroke="#272727"
+                stroke-width="2"
+              ></path>
+            </svg>
+          </button>
+           <!-- 隱藏的選單容器（預設不顯示） -->
+          <div class="dots-menu-container" id="dotsMenu" style="display: none; position: absolute; bottom: 40px; right: 2px;">
+            <nav class="sidebar-menu">
+                <ul class="menu-list">
+                  <li class="menu-item">
+                    <i class="ti ti-message-circle menu-icon"></i>
+                    <span class="menu-text">Feedback</span>
+                  </li>
+                  <li class="menu-item">
+                    <i class="ti ti-settings menu-icon"></i>
+                    <span class="menu-text">Setting</span>
+                  </li>
+                  <li class="menu-item">
+                    <i class="ti ti-info-circle menu-icon"></i>
+                    <span class="menu-text">About us</span>
+                  </li>
+                </ul>
+            </nav>
+          </div>
+        </div>
+      </aside>
+
+      <section class="main-content">
+        <header class="content-header">
+          
+        </header>
+
+        <section>
+          <h2 class="section-title">Find Popular Location in Taiwan</h2>
+          <div class="card-grid">
+            <a href="https://www.taiwan.net.tw/" target="_blank" class="card-link">
+              <article class="card">
+                <img
+                  src="https://cdn.builder.io/api/v1/image/assets/TEMP/f9ede165f72b91f0da24cc7eaff890f3a55d8c0c"
+                  alt="Location"
+                  class="card-image"
+                />
+                <div class="card-content">
+                  <h3 class="card-title">交通部觀光署</h3>
+                  <p class="card-description">
+                    台灣負責觀光發展的政府機關，推動旅遊政策與景點行銷。
+                  </p>
+                </div>
+              </article>
+            </a>
+  
+            <a href="https://okgo.tw/" target="_blank" class="card-link">
+              <article class="card">
+                <img
+                  src="https://cdn.builder.io/api/v1/image/assets/TEMP/370de0aaa1bb82c095de727093ad977426b4726c"
+                  alt="Location"
+                  class="card-image"
+                />
+                <div class="card-content">
+                  <h3 class="card-title">玩全台灣旅遊網</h3>
+                  <p class="card-description">
+                    提供台灣各地旅遊資訊，景點介紹、住宿推薦、美食與行程規劃
+                  </p>
+                </div>
+              </article>
+            </a>  
+
+            <a href="https://www.taiwantrip.com.tw/" target="_blank" class="card-link">
+              <article class="card">
+                <img
+                  src="https://cdn.builder.io/api/v1/image/assets/TEMP/d19ce107bed3472ed56f7813949fce151d73d992"
+                  alt="Location"
+                  class="card-image"
+                />
+                <div class="card-content">
+                  <h3 class="card-title">台灣好行</h3>
+                  <p class="card-description">
+                    串聯各大景點與交通樞紐的觀光公車系統，方便旅客暢遊台灣
+                  </p>
+                </div>
+              </article>
+            </a>
+
+            <a href="https://smiletaiwan.cw.com.tw/" target="_blank" class="card-link">
+              <article class="card">
+                <img
+                  src="https://cdn.builder.io/api/v1/image/assets/TEMP/293063b476bf6a2e4d3fe5ff373b7b8e1476cba6"
+                  alt="Location"
+                  class="card-image"
+                />
+                <div class="card-content">
+                  <h3 class="card-title">微笑台灣</h3>
+                  <p class="card-description">
+                    鼓勵深度旅遊與在地體驗，展現台灣的人情味與特色風景
+                  </p>
+                </div>
+              </article>
+            </a>
+          </div>
+        </section>
+
+        <section>
+          <h2 class="section-title">Find activity in Taiwan</h2>
+            <div class="card-grid">
+              <a href="https://www.klook.com/zh-TW/" target="_blank" class="card-link">
+                <article class="card">
+                  <img
+                    src="https://cdn.builder.io/api/v1/image/assets/TEMP/0125a142a84b32dd6be787e2581aed321e193eff"
+                    alt="Activity"
+                    class="card-image"
+                  />
+                  <div class="card-content">
+                    <h3 class="card-title">Klook</h3>
+                    <p class="card-description">
+                      旅遊體驗預訂平台，提供門票、交通、行程與在地活動等服務
+                    </p>
+                  </div>
+                </article>
+              </a>
+
+              <a href="https://www.huashan1914.com/w/huashan1914/index" target="_blank" class="card-link">
+                <article class="card">
+                  <img
+                    src="https://cdn.builder.io/api/v1/image/assets/TEMP/49168622727ccb9c03e00ff6a4a0d35b272038b9"
+                    alt="Activity"
+                    class="card-image"
+                  />
+                  <div class="card-content">
+                    <h3 class="card-title">華山1914文化創意產業園區</h3>
+                    <p class="card-description">
+                      由舊酒廠改建，現為展覽、表演、文創市集與活動的熱門場地
+                    </p>
+                  </div>
+                </article>
+              </a> 
+
+            <a href="https://www.songshanculturalpark.org/" target="_blank" class="card-link">
+              <article class="card">
+                <img
+                  src="https://cdn.builder.io/api/v1/image/assets/TEMP/51fbff913354ef55e44f83d276d6324f026e5736"
+                  alt="Activity"
+                  class="card-image"
+                />
+                <div class="card-content">
+                  <h3 class="card-title">松山文創園區</h3>
+                  <p class="card-description">
+                    前身為菸廠，現為文創展覽、演出與設計產業的發展基地
+                  </p>
+                </div>
+              </article>
+            </a>
+
+            <a href="https://kktix.com/" target="_blank" class="card-link">
+              <article class="card">
+                <img
+                  src="https://cdn.builder.io/api/v1/image/assets/TEMP/8f174a9821b0119c5f251f37a2f643a48996d4ca"
+                  alt="Activity"
+                  class="card-image"
+                />
+                <div class="card-content">
+                  <h3 class="card-title">KKTIX</h3>
+                  <p class="card-description">
+                    可透過平台查詢活動，快速購票或報名演出、講座與工作坊
+                  </p>
+                </div>
+              </article>
+            </a>  
+          </div>
+        </section>
+
+        <section>
+          <h2 class="section-title">Related Podcast</h2>
+          <div class="card-grid">
+            <a href="https://historysakana.firstory.io/" target="_blank" class="card-link">
+              <article class="card">
+                <img
+                  src="https://cdn.builder.io/api/v1/image/assets/TEMP/1f2fe34b719a8cbfaf2a9706c576c31fdff4c195"
+                  alt="Podcast"
+                  class="card-image"
+                />
+                <div class="card-content">
+                  <h3 class="card-title">歷史下酒菜</h3>
+                  <p class="card-description">
+                    內容以輕鬆幽默的方式講述各種歷史故事，涵蓋不同地區的歷史
+                  </p>
+                </div>
+              </article>
+            </a>  
+
+            <a href="https://ltsoj.com/" target="_blank" class="card-link">
+              <article class="card">
+                <img
+                  src="https://cdn.builder.io/api/v1/image/assets/TEMP/63f3b1c6f88dcf6822187e6c831cf928f8c679d5"
+                  alt="Podcast"
+                  class="card-image"
+                />
+                <div class="card-content">
+                  <h3 class="card-title">旅行熱炒店</h3>
+                  <p class="card-description">
+                    輕鬆有趣介紹各國文化、歷史與旅行知識，讓觀眾拓展國際視野
+                  </p>
+                </div>
+              </article>
+            </a>  
+
+            <a href="https://podcasts.apple.com/tw/podcast/%E5%8F%B0%E7%81%A3%E4%BA%BA%E5%8F%B0%E7%81%A3%E4%BA%8B/id1506018589" target="_blank" class="card-link">
+              <article class="card">
+                <img
+                  src="https://cdn.builder.io/api/v1/image/assets/TEMP/933be2fd36dffd2f9d25da11a25983b7d5717a7a"
+                  alt="Podcast"
+                  class="card-image"
+                />
+                <div class="card-content">
+                  <h3 class="card-title">台灣人台灣事</h3>
+                  <p class="card-description">
+                    專注台灣在地故事與文化探索，介紹台灣歷史、社會與獨特風貌
+                  </p>
+                </div>
+              </article>
+            </a>
+            
+            <a href="https://podcasts.apple.com/tw/podcast/%E4%B8%80%E6%AD%B7%E7%99%BE%E6%86%82%E8%A7%A3/id1529787425" target="_blank" class="card-link">
+              <article class="card">
+                <img
+                  src="https://cdn.builder.io/api/v1/image/assets/TEMP/ed095bb1e7a8c91acde1cf2decc379a10e0cb229"
+                  alt="Podcast"
+                  class="card-image"
+                />
+                <div class="card-content">
+                  <h3 class="card-title">一歷百憂解</h3>
+                  <p class="card-description">
+                    輕鬆幽默方式講述歷史故事，內容涵蓋世界歷史
+                  </p>
+                </div>
+              </article>
+            </a>
+          </div>
+        </section>
+      </section>
+    </main>
+    <script>
+      const menu = document.getElementById("dotsMenu");
+      const button = document.getElementById("dotsButton");
+    
+      button.addEventListener("click", function (event) {
+        event.stopPropagation(); // 不要讓點擊傳到 document
+        menu.style.display = menu.style.display === "none" ? "block" : "none";
+      });
+    
+      document.addEventListener("click", function (event) {
+        if (!menu.contains(event.target) && event.target !== button) {
+          menu.style.display = "none";
+        }
+      });
+    </script>     
+  </body>
+</html>
